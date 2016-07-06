@@ -17,6 +17,7 @@ public class Modulo implements Serializable {
 		super();
 		setCodigo(CODIGO_MODULO);
 		setNombre("");
+		setReferencia("");
 	}
 	public int getCodigo() {
 		return codigo;

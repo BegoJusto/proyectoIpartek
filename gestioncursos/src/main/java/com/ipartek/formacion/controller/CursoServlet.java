@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.pojo.TipoCurso;
 import com.ipartek.formacion.service.CursoService;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.Util;
 
 /**
  * Servlet implementation class CursoServlet
@@ -103,6 +105,8 @@ public class CursoServlet extends HttpServlet {
 		curso.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		curso.setNombre(nombre);
+		TipoCurso tipoCurso = Util.parseTipoCurso(request.getParameter(Constantes.PAR_TIPO_CURSO));
+		curso.setTipoCurso(tipoCurso);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.ipartek.formacion.pojo.Duracion;
 import com.ipartek.formacion.pojo.Genero;
 import com.ipartek.formacion.pojo.Idioma;
+import com.ipartek.formacion.pojo.TipoCurso;
 
 public class Util {
 	private static final int LONGITUD_DNI = 9;
@@ -57,6 +58,19 @@ public class Util {
 			}
 		}
 		return d;
+	}
+	public static TipoCurso parseTipoCurso(String tipoCurso){
+		TipoCurso tipCur = TipoCurso.FUNDACION_TRIPARTITA;
+		int codigo = Integer.parseInt(tipoCurso);
+		if(codigo == TipoCurso.HOBETUZ.getCodigo()){
+			tipCur = TipoCurso.HOBETUZ;
+		}
+		else {
+			if(codigo == TipoCurso.LANBIDE.getCodigo()){
+				tipCur = TipoCurso.LANBIDE;
+			}
+		}
+		return tipCur;
 	}
 	
 	public static List<Idioma> parseIdioma(String[] idiomas){
