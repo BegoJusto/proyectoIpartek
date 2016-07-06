@@ -1,0 +1,22 @@
+.fblack{
+	color:#000000;
+}main > form,
+main > div.row{
+	margin: 15px 0;
+}
+html{
+	min-height: 100%;
+	position: relative;
+}
+main {
+	margin-bottom: -60px;
+
+}
+footer{
+	position:absolute;
+	height: 60px;
+	bottom: 0;
+}
+.form-horizontal input{
+	width: 
+}
