@@ -34,6 +34,7 @@ public class CursoServlet extends HttpServlet {
 		try{
 			recogerId(request);
 			request.setAttribute(Constantes.ATT_TIPO_CURSOS, Constantes.LISTA_TIPO_CURSOS);
+			
 			if(id<0){
 				rd = request.getRequestDispatcher(Constantes.JSP_CURSO);
 			}else{
