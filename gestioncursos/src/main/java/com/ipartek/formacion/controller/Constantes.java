@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import com.ipartek.formacion.pojo.Duracion;
+import com.ipartek.formacion.pojo.TipoCurso;
 
 public class Constantes {
 	private Constantes() {}
@@ -21,6 +22,8 @@ public class Constantes {
 		
 	public final static String PAR_CODIGO= "codigo";
 	public final static String PAR_NOMBRE ="nombre";
+	public final static String PAR_LISTA_DE_MODULOS = "lista_de_modulos";
+	public final static String PAR_LISTA_DE_ALUMNOS = "lista_de_alumnos";
 	
 	public final static String PAR_DNI = "dni";
 	public final static String PAR_APELLIDOS = "apellidos";
@@ -36,13 +39,14 @@ public class Constantes {
 	public final static String PAR_REFERENCIA= "referencia";
 
 
+
 	
 	public final static String SERVLET_CURSOS ="cursos.do";
 	public final static String SERVLET_ALUMNOS ="alumnos.do";
 	public final static String SERVLET_MODULOS ="modulos.do";
 	
 	public final static Duracion[] LISTA_DURACION = {Duracion.QUINCE,Duracion.VEINTE,Duracion.CUARENTAYCINCO,Duracion.OCHENTA,Duracion.NOVENTA};
-	
+	public final static TipoCurso[] LISTA_TIPO_CURSOS = {TipoCurso.FUNDACION_TRIPARTITA,TipoCurso.HOBETUZ,TipoCurso.LANBIDE};
 	
 	public final static String JSP_LISTADO_CURSOS ="/cursos/listado.jsp";
 	public final static String JSP_CURSO ="/cursos/curso.jsp";
