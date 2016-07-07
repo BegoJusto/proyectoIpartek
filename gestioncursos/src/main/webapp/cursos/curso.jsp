@@ -58,10 +58,9 @@
 							if(presente){
 								presente = true;
 								nHoras += m.getDuracion().getDuracion();
-								
 							}
 							%>
-							<input type="checkbox"  <%= presente ? "checked" : "" %> 
+							<input type="checkbox"  <%= presente ? "checked" : "" %>  
 							name=""  value="<%=m.getCodigo()%>">
 					<%
 						}

@@ -1,7 +1,9 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.pojo.Alumno;
 import com.ipartek.formacion.pojo.Curso;
+import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.pojo.TipoCurso;
 import com.ipartek.formacion.service.CursoService;
 import com.ipartek.formacion.service.CursoServiceImp;
+import com.ipartek.formacion.service.AlumnoService;
+import com.ipartek.formacion.service.AlumnoServiceImp;
+import com.ipartek.formacion.service.ModuloService;
+import com.ipartek.formacion.service.ModuloServiceImp;
 import com.ipartek.formacion.service.Util;
 
 /**
@@ -24,6 +32,8 @@ public class CursoServlet extends HttpServlet {
     private int operacion = -1;
     private RequestDispatcher rd = null;
     private CursoService cService = CursoServiceImp.getInstance();
+    private AlumnoService aService = AlumnoServiceImp.getInstance();
+    private ModuloService mService = ModuloServiceImp.getInstance();
     private List<Curso> cursos = null;
     private Curso curso = null;
 	/**
@@ -44,8 +54,7 @@ public class CursoServlet extends HttpServlet {
 		} catch(Exception e){
 			getAll(request);
 		}
-		rd.forward(request, response);
-		
+		rd.forward(request, response);		
 	}
 
 	private void getById(HttpServletRequest request) {
@@ -107,8 +116,42 @@ public class CursoServlet extends HttpServlet {
 		curso.setCodigo(id);
 		String nombre = request.getParameter(Constantes.PAR_NOMBRE);
 		curso.setNombre(nombre);
+		//metodo para cargar el mapa de alumnos
+		String[] codAlumnos = request.getParameterValues(Constantes.PAR_LISTA_DE_ALUMNOS);
+		Map<String,Alumno> alumnos = getAlumnos(codAlumnos);
+		curso.setAlumnos(alumnos);
+		
+		//metodo para cargar el mapa de modulos
+		String[] codModulos = request.getParameterValues(Constantes.PAR_LISTA_DE_MODULOS);
+		Map<Integer, Modulo> modulos = getModulos(codModulos);
+		
+		
 		TipoCurso tipoCurso = Util.parseTipoCurso(request.getParameter(Constantes.PAR_TIPO_CURSO));
 		curso.setTipoCurso(tipoCurso);
+		curso.setModulos(modulos);
+		
+	}
+
+	private Map<Integer, Modulo> getModulos(String[] codModulos) {
+		Map<Integer,Modulo> modulos = new HashMap<Integer, Modulo>();
+		for(String codModulo : codModulos ){
+			Modulo modulo = null;
+			int codigo = Integer.parseInt(codModulo);
+			modulo = mService.getById(codigo);
+			modulos.put(modulo.getCodigo(), modulo);
+		}
+		return modulos;
+	}
+
+	private Map<String, Alumno> getAlumnos(String[] codAlumnos) {
+		Map<String,Alumno> alumnos = new HashMap<String, Alumno>();
+		for(String codAlumno : codAlumnos ){
+			Alumno alumno = null;
+			int codigo= Integer.parseInt(codAlumno);
+			alumno = aService.getById(codigo);
+			alumnos.put(alumno.getDni(), alumno);
+		}
+		return alumnos;
 	}
 
 }

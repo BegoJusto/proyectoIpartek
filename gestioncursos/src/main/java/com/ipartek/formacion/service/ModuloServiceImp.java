@@ -10,7 +10,7 @@ import com.ipartek.formacion.pojo.Modulo;
 import com.ipartek.formacion.service.exceptions.ModuloServiceException;
 
 public class ModuloServiceImp implements ModuloService{
-
+	private static ModuloServiceImp INSTANCE = null;
 	private List<Modulo> modulos;
 	private static int i  = 1;
 	private void init(){
@@ -32,7 +32,19 @@ public class ModuloServiceImp implements ModuloService{
 		i++;
 		return modulo;
 	}
-
+	public static ModuloServiceImp getInstance(){
+		if (INSTANCE == null){
+			createInstance();
+		}
+		return INSTANCE;
+	}	
+	
+	private synchronized static void createInstance() {
+		if (INSTANCE == null){
+			INSTANCE = new ModuloServiceImp();
+		}
+	}
+	
 	@Override
 	public Modulo getById(int codigo) {
 		Modulo modulo = null;
